@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coc&oacute; Polinari Sabattini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Caveat:wght@400;600;700&family=Bebas+Neue&family=IM+Fell+English:ital@0;1&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+:root{
+  --bg:      #0e0303;
+  --paper:   #f0e4ca;
+  --paper2:  #e6d5b0;
+  --paper3:  #d8c090;
+  --paper4:  #c8aa70;
+  --ink:     #160802;
+  --ink2:    #321608;
+  --ink3:    #5a2e10;
+  --ink4:    #8a5020;
+  --gold:    #8a6808;
+  --gold2:   #b08a20;
+  --gold3:   #d4aa38;
+  --stamp:   #4a1212;
+  --stamp2:  #6a1c1c;
+  --tape1:   rgba(185,158,100,0.42);
+  --tape2:   rgba(165,138,82,0.36);
+  --tape3:   rgba(200,172,115,0.32);
+  --text-hi:  rgba(240,228,202,0.95);
+  --text-mid: rgba(240,228,202,0.72);
+  --text-low: rgba(240,228,202,0.42);
+}
+
+body{
+  font-family:'Special Elite',serif;
+  background-color:var(--bg);
+  color:var(--paper);
+  overflow-x:hidden;
+  position:relative;
+  min-height:100vh;
+}
+
+/* === FONDO: PAPEL KRAFT CON TEXTURA REAL === */
+body::before{
+  content:'';
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    /* Manchas c&aacute;lidas de caf&eacute; */
+    radial-gradient(ellipse 40% 30% at 12% 18%, rgba(95,42,8,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 25% 20% at 78% 65%, rgba(80,35,6,0.15) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 25% at 55% 35%, rgba(70,28,5,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 90% 10%, rgba(60,22,4,0.12) 0%, transparent 55%),
+    /* Velo oscuro central */
+    radial-gradient(ellipse 120% 100% at 50% 50%, rgba(14,3,2,0.72) 0%, transparent 85%),
+    /* Bordes muy oscuros */
+    radial-gradient(ellipse 80% 70% at 0% 0%, rgba(8,1,1,0.55) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 100% 100%, rgba(6,1,1,0.6) 0%, transparent 50%);
+}
+
+/* Fibras de papel horizontales */
+body::after{
+  content:'';
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  opacity:0.028;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px, transparent 3px,
+      rgba(200,170,110,1) 3px, rgba(200,170,110,1) 4px,
+      transparent 4px, transparent 8px,
+      rgba(180,150,90,0.6) 8px, rgba(180,150,90,0.6) 9px,
+      transparent 9px, transparent 18px
+    );
+  background-size:100% 36px;
+}
+
+/* Grain fino encima de todo */
+.grain{
+  position:fixed;inset:0;z-index:9999;pointer-events:none;
+  opacity:0.048;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size:180px 180px;
+}
+
+/* === GARABATOS DE FONDO SVG === */
+.garabatos{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  overflow:hidden;
+}
+
+/* === NAV === */
+nav{
+  position:fixed;top:0;width:100%;z-index:1000;
+  background:rgba(5,0,0,0.96);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid rgba(160,120,24,0.14);
+  padding:0 52px;height:50px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:18px;letter-spacing:0.2em;
+  color:var(--gold3);text-decoration:none;
+  opacity:1;
+}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{
+  font-family:'Special Elite',serif;
+  font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(240,228,202,0.52);text-decoration:none;
+  transition:color 0.2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;
+  height:1px;background:var(--gold2);
+  transform:scaleX(0);transform-origin:left;transition:transform 0.2s;
+}
+.nav-links a:hover{color:var(--gold3)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-toggle span{display:block;width:20px;height:1px;background:var(--paper3)}
+
+/* === HERO === */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 68px 76px;
+  max-width:1120px;margin:0 auto;
+  position:relative;z-index:1;
+}
+
+/* L&iacute;nea de encuadernaci&oacute;n */
+.hero::before{
+  content:'';
+  position:absolute;left:14px;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,transparent 8%,rgba(160,120,24,0.22) 25%,rgba(160,120,24,0.38) 55%,rgba(160,120,24,0.18) 82%,transparent 96%);
+}
+
+/* Segunda l&iacute;nea &mdash; cuaderno de dos rayas */
+.hero::after{
+  content:'';
+  position:absolute;left:20px;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,transparent 8%,rgba(160,120,24,0.1) 25%,rgba(160,120,24,0.18) 55%,rgba(160,120,24,0.1) 82%,transparent 96%);
+}
+
+.hero-eyebrow{
+  font-family:'Special Elite',serif;
+  font-size:11px;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--gold3);margin-bottom:20px;
+  display:flex;align-items:center;gap:14px;
+  opacity:0;animation:fadeUp 0.6s 0.15s forwards;
+}
+.hero-eyebrow::before{
+  content:'';display:inline-block;width:28px;height:1px;
+  background:linear-gradient(to right,transparent,var(--gold2));
+}
+
+/* NOMBRE &mdash; sin ninguna transparencia */
+.hero-name-wrap{
+  position:relative;margin-bottom:2px;
+  opacity:0;animation:fadeUp 0.9s 0.3s forwards;
+}
+/* Sombra de sello */
+.hero-name-ghost{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(64px,10vw,124px);
+  line-height:0.88;letter-spacing:0.05em;
+  color:rgba(58,14,14,0.6);
+  position:absolute;top:5px;left:6px;
+  pointer-events:none;user-select:none;
+}
+.hero-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(64px,10vw,124px);
+  line-height:0.88;letter-spacing:0.05em;
+  color:var(--paper);
+  position:relative;
+}
+
+/* Post-it pegado &mdash; solo desktop */
+.hero-postit{
+  position:absolute;right:20px;top:30%;
+  transform:rotate(-2deg);
+  background:var(--paper2);color:var(--ink2);
+  padding:16px 20px 18px;max-width:188px;
+  font-family:'Caveat',cursive;font-size:14px;line-height:1.6;
+  box-shadow:3px 6px 18px rgba(0,0,0,0.65),0 0 0 1px rgba(0,0,0,0.08);
+  opacity:0;animation:fadeIn 0.9s 1.2s forwards;z-index:2;
+}
+/* Cinta washi en el postit */
+.hero-postit::before{
+  content:'';position:absolute;top:-11px;left:50%;
+  transform:translateX(-50%) rotate(-0.5deg);
+  width:62px;height:20px;background:var(--tape1);
+  border-radius:1px;
+}
+.hero-postit::after{
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:0.04;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hero-sub{
+  font-family:'Caveat',cursive;
+  font-size:clamp(21px,3vw,36px);font-weight:700;
+  color:var(--gold3);
+  margin-top:10px;margin-bottom:34px;
+  opacity:0;animation:fadeUp 0.8s 0.52s forwards;
+}
+.hero-rule{
+  position:relative;height:2px;margin-bottom:22px;
+  opacity:0;animation:fadeIn 0.8s 0.7s forwards;
+}
+.hero-rule::before{
+  content:'';position:absolute;top:0;left:0;right:20%;
+  height:1px;background:linear-gradient(to right,var(--gold2),transparent);
+}
+.hero-rule::after{
+  content:'';position:absolute;top:1px;left:0;right:40%;
+  height:1px;background:linear-gradient(to right,rgba(160,120,24,0.25),transparent);
+}
+.hero-desc{
+  font-family:'Special Elite',serif;
+  font-size:13px;letter-spacing:0.06em;
+  color:rgba(240,228,202,0.52);
+  max-width:420px;line-height:1.8;
+  opacity:0;animation:fadeUp 0.8s 0.88s forwards;
+}
+
+/* === WRAPPERS === */
+.sw{
+  max-width:970px;margin:0 auto;
+  padding:78px 52px;
+  position:relative;z-index:1;
+}
+.sw+.sw{border-top:1px solid rgba(176,136,32,0.12)}
+
+.sec-eyebrow{
+  font-family:'Special Elite',serif;
+  font-size:9px;letter-spacing:0.38em;text-transform:uppercase;
+  color:var(--gold3);margin-bottom:5px;
+  display:flex;align-items:center;gap:10px;
+}
+.sec-eyebrow::after{content:'';flex:1;height:1px;background:rgba(160,120,24,0.16)}
+
+.sec-title-row{
+  display:flex;align-items:flex-end;gap:14px;margin-bottom:44px;
+}
+.sec-n{
+  font-family:'Bebas Neue',sans-serif;font-size:62px;letter-spacing:0.04em;
+  color:rgba(160,120,24,0.08);line-height:1;flex-shrink:0;margin-bottom:-5px;
+}
+.sec-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(40px,5.5vw,66px);letter-spacing:0.01em;
+  color:var(--paper);line-height:0.96;
+}
+
+/* === ACORDE&Oacute;N DE MEDIOS === */
+/* Bot&oacute;n = papel encimado */
+.medio-btn{
+  width:100%;display:flex;align-items:center;gap:14px;
+  background:none;border:none;cursor:pointer;text-align:left;
+  padding:0;margin-top:14px;position:relative;
+}
+
+/* El "papel" detr&aacute;s &mdash; sombra de hoja */
+.medio-btn::before{
+  content:'';
+  position:absolute;
+  top:3px;left:4px;right:-4px;bottom:-3px;
+  background:rgba(237,223,192,0.04);
+  border:1px solid rgba(160,120,24,0.12);
+  transform:rotate(0.8deg);
+  transition:opacity 0.2s;
+}
+
+.medio-btn-inner{
+  position:relative;z-index:1;
+  width:100%;
+  display:flex;align-items:center;gap:14px;
+  background:rgba(240,228,202,0.045);
+  border:1px solid rgba(176,136,32,0.22);
+  padding:13px 18px;
+  transition:background 0.18s,border-color 0.18s;
+}
+.medio-btn:hover .medio-btn-inner,
+.medio-btn.open .medio-btn-inner{
+  background:rgba(240,228,202,0.09);
+  border-color:rgba(176,136,32,0.42);
+}
+
+/* Cinta washi peque&ntilde;a a la izquierda del nombre del medio */
+.medio-tape{
+  flex-shrink:0;
+  width:22px;height:10px;
+  background:var(--tape2);
+  transform:rotate(-2deg);
+  border-radius:1px;
+}
+
+.medio-nom{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:21px;letter-spacing:0.1em;
+  color:rgba(240,228,202,0.88);transition:color 0.18s;flex:1;
+}
+.medio-btn:hover .medio-nom,
+.medio-btn.open .medio-nom{color:var(--gold3)}
+
+.medio-period{
+  font-family:'Special Elite',serif;
+  font-size:10px;letter-spacing:0.1em;
+  color:rgba(240,228,202,0.4);flex-shrink:0;
+}
+.medio-arrow{
+  font-family:'Caveat',cursive;
+  font-size:18px;color:rgba(240,228,202,0.4);
+  transition:transform 0.3s,color 0.2s;flex-shrink:0;margin-left:6px;
+}
+.medio-btn.open .medio-arrow{transform:rotate(90deg);color:var(--gold2)}
+
+/* Lista desplegable */
+.medio-lista{
+  overflow:hidden;max-height:0;
+  transition:max-height 0.45s cubic-bezier(0.4,0,0.2,1);
+  border-left:1px solid rgba(176,136,32,0.18);
+  margin-left:8px;
+}
+.medio-lista.open{max-height:3500px}
+
+/* Filas de art&iacute;culos */
+a.nota-fila{
+  display:flex;align-items:baseline;
+  text-decoration:none;
+  padding:10px 8px 10px 40px;
+  border-bottom:1px solid rgba(160,120,24,0.055);
+  transition:background 0.12s;position:relative;
+}
+a.nota-fila:hover{background:rgba(240,228,202,0.055)}
+a.nota-fila:hover .nf-t{color:var(--paper)}
+a.nota-fila:hover .nf-arr{opacity:1;transform:translateX(0)}
+.nf-n{
+  font-family:'Special Elite',serif;font-size:9px;letter-spacing:0.08em;
+  color:rgba(240,228,202,0.28);min-width:26px;flex-shrink:0;
+}
+.nf-body{flex:1}
+.nf-t{
+  font-family:'Special Elite',serif;font-size:13px;
+  color:rgba(240,228,202,0.82);line-height:1.52;transition:color 0.12s;
+}
+.nf-meta{display:flex;align-items:center;gap:7px;margin-top:3px;flex-wrap:wrap}
+.nf-year{font-family:'Special Elite',serif;font-size:9px;color:rgba(240,228,202,0.38)}
+.nf-tag{
+  font-family:'Special Elite',serif;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gold3);
+  background:rgba(160,120,24,0.14);
+  padding:1px 6px;border:1px solid rgba(160,120,24,0.25);
+}
+.nf-arr{
+  font-size:10px;color:var(--gold2);
+  opacity:0;transform:translateX(-5px);
+  transition:opacity 0.12s,transform 0.12s;margin-left:8px;
+}
+
+/* Mayo card &mdash; link directo */
+.mayo-wrap{padding:6px 0 0 8px}
+.mayo-card{
+  display:inline-flex;align-items:center;gap:16px;
+  text-decoration:none;
+  padding:14px 20px;
+  border:1px solid rgba(160,120,24,0.18);
+  background:rgba(237,223,192,0.025);
+  transition:background 0.15s,border-color 0.15s;
+  position:relative;margin-top:8px;
+}
+.mayo-card::before{
+  content:'';position:absolute;top:-9px;right:16px;
+  width:44px;height:16px;background:var(--tape1);
+  transform:rotate(1deg);border-radius:1px;
+}
+.mayo-card:hover{background:rgba(237,223,192,0.05);border-color:rgba(160,120,24,0.35)}
+.mayo-cta{
+  font-family:'Special Elite',serif;font-size:11px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--gold3);
+}
+
+/* === PUBLICACIONES ACAD&Eacute;MICAS === */
+.pub-wrap{position:relative;margin-top:20px}
+
+.pub-card{
+  background:var(--paper);color:var(--ink);
+  padding:28px 36px 32px;
+  margin-bottom:32px;
+  position:relative;overflow:hidden;
+  transform:rotate(-0.4deg);
+  box-shadow:
+    4px 6px 22px rgba(0,0,0,0.55),
+    /* sombra de hoja detr&aacute;s */
+    6px 8px 0px var(--paper3),
+    8px 10px 0px rgba(196,168,100,0.4);
+}
+.pub-card:nth-child(even){transform:rotate(0.5deg)}
+
+/* L&iacute;neas de cuaderno */
+.pub-card::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(
+    0deg,transparent 0px,transparent 27px,rgba(48,22,6,0.085) 27px,rgba(48,22,6,0.085) 28px
+  );
+}
+/* Grain en el papel */
+.pub-card::after{
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:0.045;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:120px 120px;
+}
+
+.pub-tape{
+  position:absolute;top:-10px;left:28px;
+  width:52px;height:18px;background:var(--tape1);
+  transform:rotate(-1.3deg);z-index:2;border-radius:1px;
+}
+.pub-tape2{
+  position:absolute;top:-10px;right:28px;
+  width:44px;height:16px;background:var(--tape2);
+  transform:rotate(1.1deg);z-index:2;border-radius:1px;
+}
+
+.pub-in{position:relative;z-index:1}
+.pub-stamp{
+  font-family:'Special Elite',serif;font-size:9px;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--stamp2);
+  border:1px solid rgba(88,20,20,0.38);
+  display:inline-block;padding:2px 10px;margin-bottom:14px;
+  transform:rotate(-0.3deg);display:inline-block;
+}
+.pub-title{
+  font-family:'DM Serif Display',serif;font-size:18px;font-weight:normal;
+  color:var(--ink);line-height:1.5;margin-bottom:14px;
+}
+.pub-authors{
+  font-family:'Special Elite',serif;font-size:11.5px;font-style:italic;
+  color:var(--ink2);margin-bottom:6px;line-height:1.75;
+}
+.pub-year{
+  font-family:'Special Elite',serif;font-size:10px;letter-spacing:0.12em;
+  color:var(--ink4);margin-bottom:18px;
+}
+.pub-link{
+  font-family:'Special Elite',serif;font-size:10px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--stamp2);text-decoration:none;
+  border-bottom:2px solid rgba(106,28,28,0.45);padding-bottom:2px;
+  transition:border-color 0.15s;
+}
+.pub-link:hover{border-color:var(--stamp)}
+
+/* === FANZINES === */
+.fz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px}
+.fz-card{
+  background:var(--paper2);color:var(--ink);
+  padding:28px 26px 34px;
+  position:relative;overflow:hidden;
+  text-decoration:none;display:block;
+  transition:transform 0.2s;
+  transform:rotate(0.7deg);
+  box-shadow:
+    5px 7px 24px rgba(0,0,0,0.6),
+    7px 9px 0px var(--paper3),
+    9px 11px 0px rgba(196,168,100,0.35);
+  border-top:3px solid rgba(88,20,20,0.48);
+}
+.fz-card:hover{transform:rotate(0.2deg) translateY(-4px)}
+.fz-card::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(
+    0deg,transparent 0px,transparent 27px,rgba(48,22,6,0.07) 27px,rgba(48,22,6,0.07) 28px
+  );
+}
+.fz-card::after{
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:0.038;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:130px 130px;
+}
+.fz-tape{
+  position:absolute;top:-9px;left:-15px;
+  width:65px;height:16px;background:var(--tape2);
+  transform:rotate(-45deg);transform-origin:right center;z-index:3;
+}
+.fz-in{position:relative;z-index:1;border-left:3px solid rgba(88,20,20,0.42);padding-left:18px}
+.fz-num{
+  font-family:'Special Elite',serif;font-size:8px;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--stamp2);border:1px solid rgba(88,20,20,0.28);
+  display:inline-block;padding:2px 8px;margin-bottom:12px;
+}
+.fz-title{
+  font-family:'DM Serif Display',serif;font-size:20px;letter-spacing:0;
+  color:var(--ink);line-height:1.3;margin-bottom:12px;
+  font-style:italic;
+}
+.fz-body{font-family:'Special Elite',serif;font-size:12.5px;line-height:1.85;color:var(--ink2);margin-bottom:20px}
+.fz-cta{
+  font-family:'Special Elite',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--stamp);text-decoration:none;
+  border-bottom:1px solid rgba(88,20,20,0.38);padding-bottom:2px;display:inline-block;
+}
+
+/* === CUADERNO &mdash; P&Aacute;GINA EN BLANCO === */
+.cuaderno-pagina{
+  position:relative;
+  background:var(--paper);
+  min-height:320px;
+  padding:48px 52px 52px;
+  transform:rotate(-0.25deg);
+  box-shadow:
+    4px 6px 22px rgba(0,0,0,0.52),
+    6px 8px 0px var(--paper3),
+    8px 10px 0px rgba(196,168,100,0.38);
+  overflow:hidden;
+}
+/* L&iacute;neas de cuaderno en blanco */
+.cuaderno-pagina::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(
+    0deg,transparent 0px,transparent 27px,rgba(48,22,6,0.075) 27px,rgba(48,22,6,0.075) 28px
+  );
+}
+.cuaderno-pagina::after{
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:0.042;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:120px 120px;
+}
+
+/* Margen izquierdo */
+.cuaderno-margin{
+  position:absolute;left:40px;top:0;bottom:0;width:1px;
+  background:rgba(88,20,20,0.28);z-index:1;
+}
+
+/* N&uacute;mero de p&aacute;gina */
+.cuaderno-pagnum{
+  position:absolute;bottom:20px;right:28px;
+  font-family:'Caveat',cursive;font-size:13px;
+  color:rgba(48,22,6,0.2);z-index:1;
+}
+
+/* Anillos de espiral */
+.cuaderno-anillos{
+  position:absolute;left:-14px;top:0;bottom:0;
+  display:flex;flex-direction:column;justify-content:space-around;
+  padding:24px 0;z-index:2;
+}
+.anillo{
+  width:18px;height:18px;
+  border:2px solid rgba(160,120,24,0.22);
+  border-radius:50%;position:relative;
+  background:var(--bg);
+}
+.anillo::after{
+  content:'';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(160,120,24,0.14);
+}
+
+/* Texto "vac&iacute;o" en la p&aacute;gina */
+.cuaderno-vacio{
+  position:relative;z-index:1;
+  padding-left:28px;
+  height:100%;min-height:240px;
+  display:flex;flex-direction:column;justify-content:center;
+  align-items:flex-start;
+}
+
+/* Peque&ntilde;o garabato manuscrito */
+.cuaderno-garabato{
+  font-family:'Caveat',cursive;
+  font-size:14px;color:rgba(48,22,6,0.18);
+  transform:rotate(-1deg);
+  display:inline-block;margin-bottom:8px;
+}
+
+/* === FOOTER === */
+footer{
+  text-align:center;
+  padding:60px 40px 48px;
+  border-top:1px solid rgba(160,120,24,0.07);
+  position:relative;z-index:1;
+}
+
+/* Sello circular */
+.footer-stamp{
+  width:64px;height:64px;
+  border:2px solid rgba(160,120,24,0.16);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 16px;position:relative;
+}
+.footer-stamp::before{
+  content:'';position:absolute;
+  width:54px;height:54px;
+  border:1px solid rgba(160,120,24,0.1);
+  border-radius:50%;
+}
+.footer-stamp-txt{
+  font-family:'Special Elite',serif;font-size:9px;
+  text-align:center;color:rgba(237,223,192,0.16);
+  line-height:1.4;letter-spacing:0.07em;
+}
+
+.footer-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:25px;letter-spacing:0.16em;
+  color:var(--paper);opacity:0.9;margin-bottom:8px;
+}
+
+.footer-role{
+  font-family:'Special Elite',serif;
+  font-size:11px;letter-spacing:0.14em;
+  color:rgba(240,228,202,0.48);
+  margin-bottom:22px;
+}
+
+.footer-links{
+  display:flex;align-items:center;justify-content:center;
+  gap:26px;flex-wrap:wrap;
+}
+.footer-link{
+  font-family:'Special Elite',serif;font-size:10px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(240,228,202,0.52);text-decoration:none;
+  display:flex;align-items:center;gap:7px;
+  border-bottom:1px solid rgba(160,120,24,0.18);padding-bottom:2px;
+  transition:color 0.2s,border-color 0.2s;
+}
+.footer-link:hover{color:var(--gold3);border-color:rgba(160,120,24,0.5)}
+.footer-link svg{width:13px;height:13px;fill:currentColor;flex-shrink:0}
+
+/* === ANIMACIONES === */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* === RESPONSIVE === */
+@media(max-width:720px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .nav-links.open{
+    display:flex;flex-direction:column;
+    position:absolute;top:50px;left:0;right:0;
+    background:rgba(5,0,0,0.98);
+    padding:20px 20px 26px;gap:18px;
+    border-bottom:1px solid rgba(160,120,24,0.14);
+  }
+  .hero{padding:88px 24px 56px}
+  .hero-postit{display:none}
+  .sw{padding:54px 22px}
+  .pub-card,.fz-card,.cuaderno-pagina{transform:none !important;box-shadow:3px 4px 14px rgba(0,0,0,0.5)}
+  .cuaderno-anillos{display:none}
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- GARABATOS DE FONDO -->
+<div class="garabatos" aria-hidden="true">
+  <svg width="100%" height="100%" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <!-- Garabatos sutiles de m&aacute;quina de escribir y pluma -->
+    <g opacity="0.035" fill="none" stroke="rgba(200,170,100,1)" stroke-width="1">
+      <!-- Espiral esquina sup derecha -->
+      <path d="M1280,60 C1295,55 1310,62 1308,78 C1306,94 1288,100 1274,92 C1260,84 1258,66 1272,58 C1286,50 1302,60 1300,76"/>
+      <!-- Cruz de registro -->
+      <line x1="1320" y1="40" x2="1360" y2="40"/><line x1="1340" y1="20" x2="1340" y2="60"/>
+      <circle cx="1340" cy="40" r="8" stroke-width="0.8"/>
+      <!-- Ondas de mancha de caf&eacute; -->
+      <ellipse cx="120" cy="820" rx="38" ry="14" stroke-width="0.8" opacity="0.6"/>
+      <ellipse cx="120" cy="820" rx="28" ry="9" stroke-width="0.5" opacity="0.4"/>
+      <!-- L&iacute;neas de subrayado en esquina -->
+      <line x1="60" y1="200" x2="160" y2="200" stroke-width="1.2"/>
+      <line x1="70" y1="208" x2="140" y2="208" stroke-width="0.6"/>
+      <!-- Flecha manuscrita -->
+      <path d="M1100,750 C1120,740 1140,745 1150,760" stroke-width="1.2"/>
+      <path d="M1142,752 L1150,760 L1138,765" stroke-width="1.2"/>
+      <!-- Llaves de texto -->
+      <path d="M200,400 C190,410 190,430 200,440" stroke-width="1"/>
+      <path d="M200,440 C190,450 190,470 200,480" stroke-width="1"/>
+      <!-- Asteriscos/estrellitas -->
+      <g transform="translate(1350,300)">
+        <line x1="-8" y1="0" x2="8" y2="0" stroke-width="1.2"/><line x1="0" y1="-8" x2="0" y2="8" stroke-width="1.2"/>
+        <line x1="-6" y1="-6" x2="6" y2="6" stroke-width="1"/><line x1="6" y1="-6" x2="-6" y2="6" stroke-width="1"/>
+      </g>
+      <!-- Nota al margen garabateada -->
+      <path d="M80,500 Q85,495 90,500 Q95,505 100,500 Q105,495 110,500" stroke-width="0.8"/>
+      <path d="M80,512 Q90,508 110,512" stroke-width="0.8"/>
+      <path d="M80,524 Q95,520 105,524" stroke-width="0.8"/>
+    </g>
+    <!-- Manchas de tinta muy sutiles -->
+    <g opacity="0.018" fill="rgba(140,100,40,1)">
+      <ellipse cx="950" cy="180" rx="18" ry="8" transform="rotate(-15,950,180)"/>
+      <ellipse cx="380" cy="680" rx="12" ry="5" transform="rotate(8,380,680)"/>
+      <circle cx="1180" cy="520" r="6"/>
+    </g>
+    <!-- Marca de tipograf&iacute;a / registro esquina -->
+    <g opacity="0.04" stroke="rgba(200,170,100,1)" fill="none" stroke-width="0.8">
+      <rect x="30" y="30" width="22" height="22"/>
+      <line x1="30" y1="41" x2="52" y2="41"/>
+      <line x1="41" y1="30" x2="41" y2="52"/>
+    </g>
+  </svg>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#inicio" class="nav-logo">Coc&oacute; Polinari Sabattini</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#notas">Notas</a></li>
+    <li><a href="#academia">Acad&eacute;mico</a></li>
+    <li><a href="#fanzines">Fanzines</a></li>
+    <li><a href="#cuaderno">Cuaderno</a></li>
+  </ul>
+  <div class="nav-toggle" onclick="toggleNav()" aria-label="men&uacute;">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <p class="hero-eyebrow">c&oacute;rdoba &middot; derecho &middot; ciencia pol&iacute;tica</p>
+  <div class="hero-name-wrap">
+    <div class="hero-name-ghost" aria-hidden="true">Coc&oacute;<br>Polinari<br>Sabattini</div>
+    <h1 class="hero-name">Coc&oacute;<br>Polinari<br>Sabattini</h1>
+    <div class="hero-postit" aria-hidden="true">
+      mi cuaderno<br>
+      <span style="font-size:12px;opacity:0.55;">archivo de notas, publicaciones y trabajos de redacci&oacute;n</span>
+    </div>
+  </div>
+  <p class="hero-sub">&mdash; mi cuaderno</p>
+  <div class="hero-rule"></div>
+  <p class="hero-desc">archivo de notas, publicaciones y trabajos de redacci&oacute;n</p>
+</section>
+
+<!-- &#x2550;&#x2550;&#x2550; NOTAS &#x2550;&#x2550;&#x2550; -->
+<section class="sw" id="notas">
+  <p class="sec-eyebrow">01</p>
+  <div class="sec-title-row">
+    <span class="sec-n" aria-hidden="true">01</span>
+    <h2 class="sec-title">Notas</h2>
+  </div>
+
+  <!-- 421 -->
+  <button class="medio-btn" onclick="toggleMedio('c421')" aria-expanded="false">
+    <div class="medio-btn-inner">
+      <span class="medio-tape" style="background:var(--tape3)"></span>
+      <span class="medio-nom">421</span>
+      <span class="medio-period">2026</span>
+      <span class="medio-arrow">&#x203A;</span>
+    </div>
+  </button>
+  <div class="medio-lista" id="c421">
+    <a class="nota-fila" href="https://www.421.news/es/gauchito-gil-historia/" target="_blank" rel="noopener">
+      <span class="nf-n">01</span><div class="nf-body"><div class="nf-t">Antonio Mamerto Gil, el Gauchito que vivi&oacute; en su ley</div><div class="nf-meta"><span class="nf-year">2026</span><span class="nf-tag">espiritualidad</span><span class="nf-tag">cultura popular</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://www.421.news/es/vairoleto-robin-hood-pampa-leyenda-popular-argentina/" target="_blank" rel="noopener">
+      <span class="nf-n">02</span><div class="nf-body"><div class="nf-t">Vairoleto, el Robin Hood de la pampa: leyenda popular argentina</div><div class="nf-meta"><span class="nf-year">2026</span><span class="nf-tag">cultura popular</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+  </div>
+
+
+    <!-- ENFANT TERRIBLE -->
+  <button class="medio-btn" onclick="toggleMedio('et')" aria-expanded="false" style="margin-top:16px">
+    <div class="medio-btn-inner">
+      <span class="medio-tape"></span>
+      <span class="medio-nom">Enfant Terrible</span>
+      <span class="medio-period">2024 &ndash; 2026</span>
+      <span class="medio-arrow">&#x203A;</span>
+    </div>
+  </button>
+  <div class="medio-lista" id="et">
+    <a class="nota-fila" href="https://enfantterrible.com.ar/opinion/bot-desregulacion-comercio-datos-burocracia-cotidiana/" target="_blank" rel="noopener">
+      <span class="nf-n">01</span><div class="nf-body"><div class="nf-t">"Ser tu propio bot": desregulaci&oacute;n, comercio de datos y burocracia cotidiana</div><div class="nf-meta"><span class="nf-year">2026</span><span class="nf-tag">opini&oacute;n</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/opinion/la-cronologia-del-desgaste-como-llega-el-gobierno-al-domingo-electoral/" target="_blank" rel="noopener">
+      <span class="nf-n">02</span><div class="nf-body"><div class="nf-t">La cronolog&iacute;a del desgaste: c&oacute;mo llega el gobierno al domingo electoral</div><div class="nf-meta"><span class="nf-year">2025</span><span class="nf-tag">opini&oacute;n</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/opinion/construccion-verdad-sembrar-confusion/" target="_blank" rel="noopener">
+      <span class="nf-n">03</span><div class="nf-body"><div class="nf-t">Construir verdad, sembrar confusi&oacute;n</div><div class="nf-meta"><span class="nf-year">2025</span><span class="nf-tag">opini&oacute;n</span><span class="nf-tag">discurso</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/politica/la-fe-en-tiempos-de-crisis/" target="_blank" rel="noopener">
+      <span class="nf-n">04</span><div class="nf-body"><div class="nf-t">La fe en tiempos de crisis</div><div class="nf-meta"><span class="nf-year">2025</span><span class="nf-tag">pol&iacute;tica</span><span class="nf-tag">espiritualidad</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/opinion/creer-fe-negocio-catolico-evangelicos/" target="_blank" rel="noopener">
+      <span class="nf-n">05</span><div class="nf-body"><div class="nf-t">La necesidad de creer: &iquest;Qu&eacute; pasa con la fe cuando todo es negocio?</div><div class="nf-meta"><span class="nf-year">2025</span><span class="nf-tag">opini&oacute;n</span><span class="nf-tag">espiritualidad</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/derechos-humanos/discapacidad-la-disputa-que-no-termina/" target="_blank" rel="noopener">
+      <span class="nf-n">06</span><div class="nf-body"><div class="nf-t">Discapacidad: la disputa que no termina</div><div class="nf-meta"><span class="nf-year">2025</span><span class="nf-tag">derechos humanos</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/derechos-humanos/la-construccion-de-un-estado-policial/2025" target="_blank" rel="noopener">
+      <span class="nf-n">07</span><div class="nf-body"><div class="nf-t">La construcci&oacute;n de un Estado policial</div><div class="nf-meta"><span class="nf-year">2025</span><span class="nf-tag">derechos humanos</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/opinion/francisco-rebelde-neoliberalismo-deshumanizacion/" target="_blank" rel="noopener">
+      <span class="nf-n">08</span><div class="nf-body"><div class="nf-t">Francisco, rebelde: neoliberalismo y deshumanizaci&oacute;n</div><div class="nf-meta"><span class="nf-year">2025</span><span class="nf-tag">opini&oacute;n</span><span class="nf-tag">espiritualidad</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/politica/decreto-jueces-paridad-corte/" target="_blank" rel="noopener">
+      <span class="nf-n">09</span><div class="nf-body"><div class="nf-t">El decreto, los jueces y la paridad en la Corte</div><div class="nf-meta"><span class="nf-year">2025</span><span class="nf-tag">pol&iacute;tica</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/politica/feudalismo-tributario-sistema-distributivo-argentino/" target="_blank" rel="noopener">
+      <span class="nf-n">10</span><div class="nf-body"><div class="nf-t">Feudalismo tributario: el sistema distributivo argentino</div><div class="nf-meta"><span class="nf-year">2025</span><span class="nf-tag">pol&iacute;tica</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/politica/karina-milei-la-armadora/" target="_blank" rel="noopener">
+      <span class="nf-n">11</span><div class="nf-body"><div class="nf-t">Karina Milei, la armadora</div><div class="nf-meta"><span class="nf-year">2025</span><span class="nf-tag">pol&iacute;tica</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/politica/cordobesismo-politica-llaryora/" target="_blank" rel="noopener">
+      <span class="nf-n">12</span><div class="nf-body"><div class="nf-t">Cordobesismo y el arte de hacer equilibrio</div><div class="nf-meta"><span class="nf-year">2024</span><span class="nf-tag">pol&iacute;tica</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/cordoba/cronica-crisis-facultad-mas-antigua/" target="_blank" rel="noopener">
+      <span class="nf-n">13</span><div class="nf-body"><div class="nf-t">Cr&oacute;nica de la crisis en la facultad m&aacute;s antigua</div><div class="nf-meta"><span class="nf-year">2024</span><span class="nf-tag">c&oacute;rdoba</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/opinion/desconcierto-metodologia-poder/" target="_blank" rel="noopener">
+      <span class="nf-n">14</span><div class="nf-body"><div class="nf-t">El desconcierto como metodolog&iacute;a del poder</div><div class="nf-meta"><span class="nf-year">2024</span><span class="nf-tag">opini&oacute;n</span><span class="nf-tag">discurso</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/ambientalismo/fuego-leyes-presupuestos-cordoba/" target="_blank" rel="noopener">
+      <span class="nf-n">15</span><div class="nf-body"><div class="nf-t">Perdidos en el fuego: entre leyes, presupuestos, intereses y negligencias</div><div class="nf-meta"><span class="nf-year">2024</span><span class="nf-tag">ambientalismo</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/opinion/in-seguridad-juridica-reforma-estado/" target="_blank" rel="noopener">
+      <span class="nf-n">16</span><div class="nf-body"><div class="nf-t">(In)seguridad jur&iacute;dica y la reforma del Estado</div><div class="nf-meta"><span class="nf-year">2024</span><span class="nf-tag">opini&oacute;n</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/derechos-humanos/edad-punibilidad-ninos-jovenes-crisis/" target="_blank" rel="noopener">
+      <span class="nf-n">17</span><div class="nf-body"><div class="nf-t">Edad de punibilidad: ni&ntilde;os, j&oacute;venes y crisis</div><div class="nf-meta"><span class="nf-year">2024</span><span class="nf-tag">derechos humanos</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/politica/reforma-laboral-ley-bases-que-nos-cambia/" target="_blank" rel="noopener">
+      <span class="nf-n">18</span><div class="nf-body"><div class="nf-t">La reforma laboral de la Ley Bases: qu&eacute; nos cambia</div><div class="nf-meta"><span class="nf-year">2024</span><span class="nf-tag">pol&iacute;tica</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+    <a class="nota-fila" href="https://enfantterrible.com.ar/politica/rigi-regimen-nacional-ley-bases/" target="_blank" rel="noopener">
+      <span class="nf-n">19</span><div class="nf-body"><div class="nf-t">RIGI: el r&eacute;gimen nacional en la Ley Bases</div><div class="nf-meta"><span class="nf-year">2024</span><span class="nf-tag">pol&iacute;tica</span></div></div><span class="nf-arr">&#x2197;</span>
+    </a>
+  </div>
+
+
+    <!-- MAYO REVISTA SINDICAL -->
+  <button class="medio-btn" onclick="toggleMedio('mayo')" aria-expanded="false" style="margin-top:16px">
+    <div class="medio-btn-inner">
+      <span class="medio-tape" style="background:var(--tape1);transform:rotate(1.5deg)"></span>
+      <span class="medio-nom">Mayo Revista Sindical</span>
+      <span class="medio-period">/ciclo terminado/</span>
+      <span class="medio-arrow">&#x203A;</span>
+    </div>
+  </button>
+  <div class="medio-lista" id="mayo">
+    <div class="mayo-wrap">
+      <a class="mayo-card" href="https://mayorevista.ar/" target="_blank" rel="noopener">
+        <span class="mayo-cta">ver revista &#x2197;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- &#x2550;&#x2550;&#x2550; PUBLICACIONES ACAD&Eacute;MICAS &#x2550;&#x2550;&#x2550; -->
+<section class="sw" id="academia">
+  <p class="sec-eyebrow">02</p>
+  <div class="sec-title-row">
+    <span class="sec-n" aria-hidden="true">02</span>
+    <h2 class="sec-title">Publicaciones</h2>
+  </div>
+
+  <div class="pub-wrap">
+    <div class="pub-card" style="margin-top:20px">
+      <div class="pub-tape"></div>
+      <div class="pub-in">
+        <p class="pub-stamp">Anuario CIJS &middot; Facultad de Derecho UNC</p>
+        <h3 class="pub-title">Perspectiva de an&aacute;lisis socio-hist&oacute;rico en torno a la eficacia jur&iacute;dica: el caso de Colombia y Argentina</h3>
+        <p class="pub-authors">Nerea Lucrecia Jodor (FD-UNC) &middot; Katerine Hern&aacute;ndez Tirado (UPB, Colombia)<br>Daniela Mar&iacute;a Orozco Poveda (UPB, Colombia) &middot; Constanza Polinari Sabattini (FD-UNC)</p>
+        <p class="pub-year">2022</p>
+        <a class="pub-link" href="https://revistas.unc.edu.ar/index.php/anuariocijs/article/view/37608" target="_blank" rel="noopener">Leer en Anuario CIJS &#x2197;</a>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-tape2"></div>
+      <div class="pub-in">
+        <p class="pub-stamp">EaD em Foco &middot; CECIERJ</p>
+        <h3 class="pub-title">Los efectos de la readecuaci&oacute;n de las estrategias de permanencia y adaptaci&oacute;n para el contexto COVID-19: una experiencia en las aulas de la Facultad de Derecho (UNC)</h3>
+        <p class="pub-authors">Nerea Lucrecia Jodor &middot; Katerine Hern&aacute;ndez Tirado<br>Daniela Mar&iacute;a Orozco Poveda &middot; Constanza Polinari Sabattini</p>
+        <p class="pub-year">2021</p>
+        <a class="pub-link" href="https://eademfoco.cecierj.edu.br/index.php/Revista/article/view/1266" target="_blank" rel="noopener">Leer en EaD em Foco &#x2197;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- &#x2550;&#x2550;&#x2550; FANZINES &#x2550;&#x2550;&#x2550; -->
+<section class="sw" id="fanzines">
+  <p class="sec-eyebrow">03</p>
+  <div class="sec-title-row">
+    <span class="sec-n" aria-hidden="true">03</span>
+    <h2 class="sec-title">Fanzines</h2>
+  </div>
+  <div class="fz-grid">
+    <a class="fz-card" href="https://drive.google.com/file/d/1DwfQvWUPwnCFt4Pol0nN9D1Hq8Pe7Mvw/view" target="_blank" rel="noopener">
+      <div class="fz-tape"></div>
+      <div class="fz-in">
+        <p class="fz-num">Fanzine N&deg; 01</p>
+        <h3 class="fz-title">Sobre el acceso al derecho al aborto seguro y gratuito</h3>
+        <p class="fz-body">Lo que dice la ley, lo que pasa en la pr&aacute;ctica y lo que todav&iacute;a falta.</p>
+        <span class="fz-cta">leer fanzine &#x2197;</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- &#x2550;&#x2550;&#x2550; CUADERNO &#x2550;&#x2550;&#x2550; -->
+<section class="sw" id="cuaderno">
+  <p class="sec-eyebrow">04</p>
+  <div class="sec-title-row">
+    <span class="sec-n" aria-hidden="true">04</span>
+    <h2 class="sec-title">Cuaderno</h2>
+  </div>
+
+  <div style="position:relative">
+    <div class="cuaderno-anillos">
+      <div class="anillo"></div><div class="anillo"></div>
+      <div class="anillo"></div><div class="anillo"></div>
+      <div class="anillo"></div>
+    </div>
+    <div class="cuaderno-pagina">
+      <div class="cuaderno-margin"></div>
+      <div class="cuaderno-vacio">
+        <span class="cuaderno-garabato">...</span>
+      </div>
+      <span class="cuaderno-pagnum">1</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-stamp">
+    <div class="footer-stamp-txt">cba<br>arg</div>
+  </div>
+  <p class="footer-name">Coc&oacute; Polinari Sabattini</p>
+  <p class="footer-role">Estudiante UNC &nbsp;&middot;&nbsp; C&oacute;rdoba, Argentina</p>
+  <div class="footer-links">
+    <a class="footer-link" href="https://www.instagram.com/13.coco.p/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      @13.coco.p
+    </a>
+    <a class="footer-link" href="https://www.linkedin.com/in/constanza-polinari-sabattini/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+  </div>
+</footer>
+
+<script>
+function toggleMedio(id){
+  var lista=document.getElementById(id);
+  var btnInner=lista.previousElementSibling;
+  var isOpen=lista.classList.contains('open');
+  lista.classList.toggle('open',!isOpen);
+  btnInner.classList.toggle('open',!isOpen);
+  btnInner.setAttribute('aria-expanded',String(!isOpen));
+}
+function toggleNav(){
+  document.getElementById('navLinks').classList.toggle('open');
+}
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click',function(){document.getElementById('navLinks').classList.remove('open')});
+});
+</script>
+</body>
+</html>
