@@ -509,81 +509,6 @@ a.nota-fila:hover .nf-arr{opacity:1;transform:translateX(0)}
   border-bottom:1px solid rgba(88,20,20,0.38);padding-bottom:2px;display:inline-block;
 }
 
-/* === CUADERNO &mdash; P&Aacute;GINA EN BLANCO === */
-.cuaderno-pagina{
-  position:relative;
-  background:var(--paper);
-  min-height:320px;
-  padding:48px 52px 52px;
-  transform:rotate(-0.25deg);
-  box-shadow:
-    4px 6px 22px rgba(0,0,0,0.52),
-    6px 8px 0px var(--paper3),
-    8px 10px 0px rgba(196,168,100,0.38);
-  overflow:hidden;
-}
-/* L&iacute;neas de cuaderno en blanco */
-.cuaderno-pagina::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background-image:repeating-linear-gradient(
-    0deg,transparent 0px,transparent 27px,rgba(48,22,6,0.075) 27px,rgba(48,22,6,0.075) 28px
-  );
-}
-.cuaderno-pagina::after{
-  content:'';position:absolute;inset:0;pointer-events:none;opacity:0.042;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size:120px 120px;
-}
-
-/* Margen izquierdo */
-.cuaderno-margin{
-  position:absolute;left:40px;top:0;bottom:0;width:1px;
-  background:rgba(88,20,20,0.28);z-index:1;
-}
-
-/* N&uacute;mero de p&aacute;gina */
-.cuaderno-pagnum{
-  position:absolute;bottom:20px;right:28px;
-  font-family:'Caveat',cursive;font-size:13px;
-  color:rgba(48,22,6,0.2);z-index:1;
-}
-
-/* Anillos de espiral */
-.cuaderno-anillos{
-  position:absolute;left:-14px;top:0;bottom:0;
-  display:flex;flex-direction:column;justify-content:space-around;
-  padding:24px 0;z-index:2;
-}
-.anillo{
-  width:18px;height:18px;
-  border:2px solid rgba(160,120,24,0.22);
-  border-radius:50%;position:relative;
-  background:var(--bg);
-}
-.anillo::after{
-  content:'';position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:6px;height:6px;border-radius:50%;
-  background:rgba(160,120,24,0.14);
-}
-
-/* Texto "vac&iacute;o" en la p&aacute;gina */
-.cuaderno-vacio{
-  position:relative;z-index:1;
-  padding-left:28px;
-  height:100%;min-height:240px;
-  display:flex;flex-direction:column;justify-content:center;
-  align-items:flex-start;
-}
-
-/* Peque&ntilde;o garabato manuscrito */
-.cuaderno-garabato{
-  font-family:'Caveat',cursive;
-  font-size:14px;color:rgba(48,22,6,0.18);
-  transform:rotate(-1deg);
-  display:inline-block;margin-bottom:8px;
-}
-
 /* === FOOTER === */
 footer{
   text-align:center;
@@ -659,8 +584,7 @@ footer{
   .hero{padding:88px 24px 56px}
   .hero-postit{display:none}
   .sw{padding:54px 22px}
-  .pub-card,.fz-card,.cuaderno-pagina{transform:none !important;box-shadow:3px 4px 14px rgba(0,0,0,0.5)}
-  .cuaderno-anillos{display:none}
+  .pub-card,.fz-card{transform:none !important;box-shadow:3px 4px 14px rgba(0,0,0,0.5)}
 }
 </style>
 </head>
@@ -721,7 +645,6 @@ footer{
     <li><a href="#notas">Notas</a></li>
     <li><a href="#academia">Acad&eacute;mico</a></li>
     <li><a href="#fanzines">Fanzines</a></li>
-    <li><a href="#cuaderno">Cuaderno</a></li>
   </ul>
   <div class="nav-toggle" onclick="toggleNav()" aria-label="men&uacute;">
     <span></span><span></span><span></span>
@@ -744,7 +667,7 @@ footer{
   <p class="hero-desc">archivo de notas, publicaciones y trabajos de redacci&oacute;n</p>
 </section>
 
-<!-- &#x2550;&#x2550;&#x2550; NOTAS &#x2550;&#x2550;&#x2550; -->
+<!-- NOTAS -->
 <section class="sw" id="notas">
   <p class="sec-eyebrow">01</p>
   <div class="sec-title-row">
@@ -771,7 +694,7 @@ footer{
   </div>
 
 
-    <!-- ENFANT TERRIBLE -->
+  <!-- ENFANT TERRIBLE -->
   <button class="medio-btn" onclick="toggleMedio('et')" aria-expanded="false" style="margin-top:16px">
     <div class="medio-btn-inner">
       <span class="medio-tape"></span>
@@ -841,7 +764,7 @@ footer{
   </div>
 
 
-    <!-- MAYO REVISTA SINDICAL -->
+  <!-- MAYO REVISTA SINDICAL -->
   <button class="medio-btn" onclick="toggleMedio('mayo')" aria-expanded="false" style="margin-top:16px">
     <div class="medio-btn-inner">
       <span class="medio-tape" style="background:var(--tape1);transform:rotate(1.5deg)"></span>
@@ -859,7 +782,7 @@ footer{
   </div>
 </section>
 
-<!-- &#x2550;&#x2550;&#x2550; PUBLICACIONES ACAD&Eacute;MICAS &#x2550;&#x2550;&#x2550; -->
+<!-- PUBLICACIONES ACAD&Eacute;MICAS -->
 <section class="sw" id="academia">
   <p class="sec-eyebrow">02</p>
   <div class="sec-title-row">
@@ -892,7 +815,7 @@ footer{
   </div>
 </section>
 
-<!-- &#x2550;&#x2550;&#x2550; FANZINES &#x2550;&#x2550;&#x2550; -->
+<!-- FANZINES -->
 <section class="sw" id="fanzines">
   <p class="sec-eyebrow">03</p>
   <div class="sec-title-row">
@@ -900,39 +823,15 @@ footer{
     <h2 class="sec-title">Fanzines</h2>
   </div>
   <div class="fz-grid">
-    <a class="fz-card" href="https://drive.google.com/file/d/1DwfQvWUPwnCFt4Pol0nN9D1Hq8Pe7Mvw/view" target="_blank" rel="noopener">
+    <a class="fz-card" href="fanzines/fanzine-01-ive.pdf" target="_blank" rel="noopener">
       <div class="fz-tape"></div>
       <div class="fz-in">
-        <p class="fz-num">Fanzine N&deg; 01</p>
-        <h3 class="fz-title">Sobre el acceso al derecho al aborto seguro y gratuito</h3>
-        <p class="fz-body">Lo que dice la ley, lo que pasa en la pr&aacute;ctica y lo que todav&iacute;a falta.</p>
+        <p class="fz-num">Fanzine N&deg; 01 &middot; 2022</p>
+        <h3 class="fz-title">Sobre el derecho a la interrupci&oacute;n voluntaria del embarazo (Ley 27.610)</h3>
+        <p class="fz-body">Plazos, derechos, cobertura y qu&eacute; hacer cuando una instituci&oacute;n incumple. Edici&oacute;n redise&ntilde;ada en 2026.</p>
         <span class="fz-cta">leer fanzine &#x2197;</span>
       </div>
     </a>
-  </div>
-</section>
-
-<!-- &#x2550;&#x2550;&#x2550; CUADERNO &#x2550;&#x2550;&#x2550; -->
-<section class="sw" id="cuaderno">
-  <p class="sec-eyebrow">04</p>
-  <div class="sec-title-row">
-    <span class="sec-n" aria-hidden="true">04</span>
-    <h2 class="sec-title">Cuaderno</h2>
-  </div>
-
-  <div style="position:relative">
-    <div class="cuaderno-anillos">
-      <div class="anillo"></div><div class="anillo"></div>
-      <div class="anillo"></div><div class="anillo"></div>
-      <div class="anillo"></div>
-    </div>
-    <div class="cuaderno-pagina">
-      <div class="cuaderno-margin"></div>
-      <div class="cuaderno-vacio">
-        <span class="cuaderno-garabato">...</span>
-      </div>
-      <span class="cuaderno-pagnum">1</span>
-    </div>
   </div>
 </section>
 
